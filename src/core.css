@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'PixelifySans';
+  src: url('./fonts/PixelifySans-Regular.ttf') format('woff2'), url('./fonts/PixelifySans-Regular.ttf') format('woff');
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-family: 'PixelifySans';
+  background: #70a37f;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex; /* Permite que os filhos do #root sejam alinhados de forma flexível */
+  flex-direction: column;
+  justify-content: center; /* Alinha o conteúdo no centro horizontal */
+  align-items: center; /* Alinha o conteúdo no centro vertical */
+}
