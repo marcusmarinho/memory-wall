@@ -23,9 +23,21 @@ html {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  height: 100vh;
-  display: flex; /* Permite que os filhos do #root sejam alinhados de forma flexível */
-  flex-direction: column;
-  justify-content: center; /* Alinha o conteúdo no centro horizontal */
-  align-items: center; /* Alinha o conteúdo no centro vertical */
+}
+
+input[type='file']::file-selector-button {
+  background-color: #fff;
+  color: #000;
+  border: 4px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-right: 20px;
+  transition: 0.5s;
+  font-family: 'PixelifySans';
+  cursor: pointer;
+}
+
+input[type='file']::file-selector-button:hover {
+  font-size: 2rem;
+  border-color: #e2725b;
 }
