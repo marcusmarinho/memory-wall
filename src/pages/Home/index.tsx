@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import * as S from './style';
 import { supabase } from '../../supabase/config';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../Login/style';
 
 interface ImageItem {
   id: number;
@@ -12,7 +11,7 @@ interface ImageItem {
 export const HomePage: React.FC = () => {
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [images, setImages] = useState<ImageItem[]>([]);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [_authenticated, setAuthenticated] = useState(false);
   const navigate = useNavigate();
   const fetchImages = async () => {
     const { data, error } = await supabase.from('imagens').select('*');

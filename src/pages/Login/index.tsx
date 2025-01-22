@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [authenticated, setAuthenticated] = useState(false);
+  const [_authenticated, setAuthenticated] = useState(false);
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
   const [status, setStatus] = useState<'loading' | 'pristine' | 'success' | 'error'>('loading');
