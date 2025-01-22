@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react-swc';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/{memory-wall}',
+  base: '/memory-wall',
   plugins: [react()],
 });
