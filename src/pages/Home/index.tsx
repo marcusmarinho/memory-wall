@@ -12,18 +12,22 @@ export const HomePage: React.FC = () => {
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [images, setImages] = useState<ImageItem[]>([]);
   const [_authenticated, setAuthenticated] = useState(false);
+  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const navigate = useNavigate();
   const fetchImages = async () => {
+    setStatus('loading');
     const { data, error } = await supabase.from('imagens').select('*');
 
     if (error) {
       console.error('Erro ao buscar imagens:', error);
+      setStatus('error');
     } else {
       const processedImages = (data || []).map((image: ImageItem) => ({
         ...image,
         url: image.image_url.startsWith('data:') ? image.image_url : `data:image/jpeg;base64,${image.image_url}`,
       }));
       setImages(processedImages);
+      setStatus('success');
     }
   };
   const checkSession = async () => {
@@ -79,53 +83,59 @@ export const HomePage: React.FC = () => {
     setNewImageFile(null);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <S.Container>
       <div>
         <h1>Mural de Memorias</h1>
       </div>
+      {status === 'loading' && <p>Carregando nossos momentos...</p>}
+      {status === 'success' && (
+        <>
+          <div>
+            <div>
+              <S.HeartIcon onClick={handleFileClick}>Clique aqui para adicionar uma memória</S.HeartIcon>
+              {newImageFile?.name && (
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    gap: 16,
+                    alignItems: 'baseline',
+                  }}
+                >
+                  <p>Adicionado : {newImageFile.name}</p>{' '}
+                  <div>
+                    <S.SaveButton onClick={handleCleanState}> Cancelar</S.SaveButton>{' '}
+                    <S.SaveButton onClick={addImage}> Salvar</S.SaveButton>
+                  </div>
+                </div>
+              )}
 
-      <div>
-        <div>
-          <S.HeartIcon onClick={handleFileClick}>Clique aqui para adicionar uma memória</S.HeartIcon>
-          {newImageFile?.name && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                gap: 16,
-                alignItems: 'baseline',
-              }}
-            >
-              <p>Adicionado : {newImageFile.name}</p>{' '}
-              <div>
-                <S.SaveButton onClick={handleCleanState}> Cancelar</S.SaveButton>{' '}
-                <S.SaveButton onClick={addImage}> Salvar</S.SaveButton>
-              </div>
-            </div>
-          )}
-
-          <input
-            onChange={(e) => setNewImageFile(e.target.files ? e.target.files[0] : null)}
-            type='file'
-            id='getFile'
-            style={{ display: 'none' }}
-          />
-        </div>
-      </div>
-      <div>
-        <S.ImageGrid>
-          {images.map((image) => (
-            <div key={image.id} style={{ textAlign: 'center' }}>
-              <img
-                src={image.image_url}
-                alt={image.image_url}
-                style={{ width: '100%', height: 'auto', borderRadius: 25 }}
+              <input
+                onChange={(e) => setNewImageFile(e.target.files ? e.target.files[0] : null)}
+                type='file'
+                id='getFile'
+                style={{ display: 'none' }}
               />
             </div>
-          ))}
-        </S.ImageGrid>
-      </div>
+          </div>
+          <div>
+            <S.ImageGrid>
+              {images.map((image) => (
+                <div key={image.id} style={{ textAlign: 'center' }}>
+                  <img
+                    src={image.image_url}
+                    alt={image.image_url}
+                    style={{ width: '100%', height: 'auto', borderRadius: 25 }}
+                  />
+                </div>
+              ))}
+            </S.ImageGrid>
+          </div>
+        </>
+      )}
     </S.Container>
   );
 };

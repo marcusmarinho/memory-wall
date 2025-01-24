@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Redireciona o usuário para o index.html, mantendo a rota no URL
+      const redirectTo = window.location.pathname.replace('/memory-wall', '');
+      window.location.replace('/memory-wall/index.html' + (redirectTo || ''));
+    </script>
+  </head>
+  <body></body>
+</html>
