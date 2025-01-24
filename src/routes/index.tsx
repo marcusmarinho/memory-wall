@@ -3,7 +3,7 @@ import { HomePage, LoginPage } from '../pages';
 
 export const ProjectRoutes = () => {
   return (
-    <BrowserRouter basename='memory-wall'>
+    <BrowserRouter basename='/memory-wall'>
       <Routes>
         <Route path='/' element={<LoginPage></LoginPage>}></Route>
         <Route path='/home' element={<HomePage></HomePage>}></Route>
