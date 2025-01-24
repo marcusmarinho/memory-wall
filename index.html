@@ -5,6 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/memory-wall/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <script>
+      // Redireciona o usuário para o index.html, mantendo a rota no URL
+      const redirectTo = window.location.pathname.replace('/memory-wall', '');
+      window.location.replace('/memory-wall/index.html' + (redirectTo || ''));
+    </script>
     <script type="module" crossorigin src="/memory-wall/assets/index-Dm07b3rL.js"></script>
     <link rel="stylesheet" crossorigin href="/memory-wall/assets/index-DfyyUPBE.css">
   </head>
