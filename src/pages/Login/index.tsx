@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/config';
 import * as S from './style';
 import { useNavigate } from 'react-router-dom';
+import { forceHashUrl } from '../../hooks';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -39,12 +40,6 @@ export const LoginPage: React.FC = () => {
   };
   useEffect(() => {
     checkSession();
-  }, []);
-
-  useEffect(() => {
-    if (!window.location.hash) {
-      window.location.replace(`${window.location.pathname}/#/`);
-    }
   }, []);
 
   return (

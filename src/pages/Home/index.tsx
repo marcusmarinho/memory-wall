@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as S from './style';
 import { supabase } from '../../supabase/config';
 import { useNavigate } from 'react-router-dom';
+import { forceHashUrl } from '../../hooks';
 
 interface ImageItem {
   id: number;
@@ -9,6 +10,7 @@ interface ImageItem {
   image_url: string; // Pode ser URL ou base64
 }
 export const HomePage: React.FC = () => {
+  forceHashUrl();
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [images, setImages] = useState<ImageItem[]>([]);
   const [_authenticated, setAuthenticated] = useState(false);
@@ -43,12 +45,6 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     checkSession();
-  }, []);
-
-  useEffect(() => {
-    if (!window.location.hash) {
-      window.location.replace(`${window.location.pathname}/#/`);
-    }
   }, []);
 
   const handleFileClick = () => {
