@@ -3,7 +3,7 @@ import { ProjectRoutes } from './routes';
 function App() {
   useEffect(() => {
     if (!window.location.hash) {
-      window.location.replace(`${window.location.pathname}#/`);
+      window.location.replace(`${window.location.pathname}/#/`);
     }
   }, []);
   return <ProjectRoutes></ProjectRoutes>;
