@@ -45,6 +45,12 @@ export const HomePage: React.FC = () => {
     checkSession();
   }, []);
 
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.location.replace(`${window.location.pathname}/#/`);
+    }
+  }, []);
+
   const handleFileClick = () => {
     const element = window.document.getElementById('getFile');
     if (element) {

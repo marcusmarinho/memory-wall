@@ -41,6 +41,12 @@ export const LoginPage: React.FC = () => {
     checkSession();
   }, []);
 
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.location.replace(`${window.location.pathname}/#/`);
+    }
+  }, []);
+
   return (
     <S.Container>
       {status === 'loading' && <h1>Carregando...</h1>}
