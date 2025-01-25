@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { forceHashUrl } from '../../hooks';
 
 export const LoginPage: React.FC = () => {
+  forceHashUrl();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [_authenticated, setAuthenticated] = useState(false);
